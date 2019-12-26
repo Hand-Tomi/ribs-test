@@ -1,6 +1,6 @@
 package com.example.ribstest.root.logged_out
 
-import android.view.View
+import com.example.ribstest.second.SecondRootActivity
 
 import com.uber.rib.core.ViewRouter
 
@@ -12,4 +12,12 @@ import com.uber.rib.core.ViewRouter
 class LoggedOutRouter(
     view: LoggedOutView,
     interactor: LoggedOutInteractor,
-    component: LoggedOutBuilder.Component) : ViewRouter<LoggedOutView, LoggedOutInteractor, LoggedOutBuilder.Component>(view, interactor, component)
+    component: LoggedOutBuilder.Component
+) : ViewRouter<LoggedOutView, LoggedOutInteractor, LoggedOutBuilder.Component>(view, interactor, component) {
+
+    fun startSecondActivity() {
+        view.context.startActivity(
+            SecondRootActivity.createIntent(view.context)
+        )
+    }
+}

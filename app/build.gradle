@@ -42,6 +42,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    // rxBinding
+    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.1.1'
+
     // ribs
     kapt 'com.uber.rib:rib-compiler-test:0.9.2'
     implementation 'com.uber.rib:rib-android:0.9.2'

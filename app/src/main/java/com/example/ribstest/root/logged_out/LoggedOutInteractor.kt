@@ -3,6 +3,8 @@ package com.example.ribstest.root.logged_out
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 /**
@@ -16,20 +18,26 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
   @Inject
   lateinit var presenter: LoggedOutPresenter
 
+  private val compositeDisposable = CompositeDisposable()
+
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+    val disposable = presenter.loginName()
+      .subscribe {
+        router.startSecondActivity()
+      }
+    compositeDisposable.add(disposable)
   }
 
   override fun willResignActive() {
     super.willResignActive()
-
-    // TODO: Perform any required clean up here, or delete this method entirely if not needed.
+    compositeDisposable.clear()
   }
 
   /**
    * Presenter interface implemented by this RIB's view.
    */
-  interface LoggedOutPresenter
+  interface LoggedOutPresenter {
+    fun loginName(): Observable<String>
+  }
 }
