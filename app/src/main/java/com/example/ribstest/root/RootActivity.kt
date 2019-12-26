@@ -1,4 +1,4 @@
-package com.example.ribstest
+package com.example.ribstest.root
 
 import android.view.ViewGroup
 import com.example.ribstest.root.RootBuilder
