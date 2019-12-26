@@ -3,6 +3,7 @@ package com.example.ribstest.root
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.ribstest.R
+import com.example.ribstest.root.logged_out.LoggedOutBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -39,9 +40,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
     return inflater.inflate(R.layout.root_rib, parentViewGroup, false) as RootView
   }
 
-  interface ParentComponent {
-
-  }
+  interface ParentComponent
 
   @dagger.Module
   abstract class Module {
@@ -60,7 +59,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
           component: Component,
           view: RootView,
           interactor: RootInteractor): RootRouter {
-        return RootRouter(view, interactor, component)
+        return RootRouter(view, interactor, component, LoggedOutBuilder(component))
       }
     }
 
@@ -69,7 +68,7 @@ class RootBuilder(dependency: ParentComponent) : ViewBuilder<RootView, RootRoute
 
   @RootScope
   @dagger.Component(modules = [Module::class], dependencies = [ParentComponent::class])
-  interface Component : InteractorBaseComponent<RootInteractor>, BuilderComponent {
+  interface Component : InteractorBaseComponent<RootInteractor>, BuilderComponent, LoggedOutBuilder.ParentComponent {
 
     @dagger.Component.Builder
     interface Builder {
