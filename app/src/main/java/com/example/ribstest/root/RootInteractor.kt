@@ -18,8 +18,7 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+    router.attachLoggedOut()
   }
 
   override fun willResignActive() {
