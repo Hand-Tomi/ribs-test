@@ -2,13 +2,12 @@ package com.example.ribstest.root.logged_out
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.example.ribstest.R
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy.CLASS
 import javax.inject.Qualifier
 import javax.inject.Scope
 
@@ -37,9 +36,7 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
   }
 
   override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): LoggedOutView? {
-    // TODO: Inflate a new view using the provided inflater, or create a new view programatically using the
-    // provided context from the parentViewGroup.
-    return null
+    return inflater.inflate(R.layout.logged_out_rib, parentViewGroup, false) as LoggedOutView
   }
 
   interface ParentComponent {
@@ -92,10 +89,10 @@ class LoggedOutBuilder(dependency: ParentComponent) : ViewBuilder<LoggedOutView,
   }
 
   @Scope
-  @Retention(CLASS)
+  @kotlin.annotation.Retention(AnnotationRetention.BINARY)
   internal annotation class LoggedOutScope
 
   @Qualifier
-  @Retention(CLASS)
+  @kotlin.annotation.Retention(AnnotationRetention.BINARY)
   internal annotation class LoggedOutInternal
 }
